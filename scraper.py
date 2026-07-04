@@ -8,23 +8,25 @@ def scrape_books(): #defining scrape_books library we created that visit website
 
     soup = BeautifulSoup(response.text, "html.parser")
 
-    books = soup.find_all("article", class_="product_pod")
+    book_cards = soup.find_all("article", class_="product_pod")
 
     book_list = [] #adding a dictionary for each book
 
-    for book in books:
+    for book in book_cards:
         title = book.h3.a["title"]
-        price = (
+        price = float(
             book.find("p", class_= "price_color")
                 .text
-                .replace("Â", "")
+                .replace("Â£", "")
         )
         availability = book.find("p", class_="instock availability").text.strip()
 
+        print(price, type(price))
+        
         book_list.append({
             "title": title,
             "price": price,
-            "availabiliy": availability
+            "availability": availability
         })
 
     return book_list
