@@ -24,7 +24,7 @@ def home():
         books.append({
             "title": row[0],
             "price": row[1],
-            "data_scraped": row[2]
+            "date_scraped": row[2]
         })
 
     return render_template("home.html", books=books) #Flask opens home.html and sends info of books to the browser
